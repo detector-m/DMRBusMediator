@@ -38,8 +38,7 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
     return self.dataSource.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     cell.textLabel.text = self.dataSource[indexPath.row];
     return cell;
@@ -70,8 +69,7 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
     return _tableView;
 }
 
-- (NSArray *)dataSource
-{
+- (NSArray *)dataSource {
     if (_dataSource == nil) {
 //        _dataSource = @[@"present detail view controller",
 //                        @"push detail view controller",
