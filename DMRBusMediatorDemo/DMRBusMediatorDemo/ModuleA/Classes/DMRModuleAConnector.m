@@ -52,7 +52,14 @@ NS_ASSUME_NONNULL_BEGIN
     // tip: url较少的时候可以通过if-else去处理，如果url较多，可以自己维护一个url和ViewController的map，加快遍历查找，生成viewController；
     if ([url.host isEqualToString:@"ADetail"]) {
         DMRModuleADemoViewController *vc = [[DMRModuleADemoViewController alloc] init];
-        vc.valueLabel.text = parameters[@"key"];
+        if (parameters[@"key"]) {
+            vc.valueLabel.text = parameters[@"key"];
+        }
+//        else {
+//            vc.valueLabel.text = @"no image";
+//            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:vc animated:YES completion:nil];
+//            return [UIViewController notURLController];
+//        }
         
         return vc;
     }

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIViewController+NavigationTip.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

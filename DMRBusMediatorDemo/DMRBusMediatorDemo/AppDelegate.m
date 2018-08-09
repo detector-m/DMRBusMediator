@@ -21,12 +21,14 @@
     UITabBarController *rootTabBarController = [[UITabBarController alloc] init];
     
     //navTab1
-    UINavigationController *navTab1 = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
+    ViewController *viewController1 = [ViewController new];
+    viewController1.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:0];
+    UINavigationController *navTab1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
     
     //navTab2
     UIViewController *viewController2 = [DMRBusMediator viewControllerForURL:[NSURL URLWithString:@"productScheme://ADetail"]];
     viewController2.title = @"navTab2";
-    viewController2.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemDownloads tag:0];
+    viewController2.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
     UINavigationController *navTab2 = [[UINavigationController alloc] initWithRootViewController:viewController2];
     
     rootTabBarController.viewControllers = @[navTab1, navTab2];
