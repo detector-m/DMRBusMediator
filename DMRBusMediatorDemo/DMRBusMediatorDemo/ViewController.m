@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "DMRBusMediator.h"
+#import "DMRModuleAServiceProtocol.h"
+#import "DMRModuleAItem.h"
 
 NSString * const kCellIdentifier = @"kCellIdentifier";
 
@@ -65,6 +67,27 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
         
         return;
     }
+    
+    if (indexPath.row == 2) {
+        [[DMRBusMediator serviceForProtocol:@protocol(DMRModuleAServiceProtocol)] moduleAShowAlertWithMessage:@"Alert Message" cancelAction:nil confirmAction:^(NSDictionary * _Nullable info) {
+            NSLog(@"%@", info);
+        }];
+        return;
+    }
+    
+    if (indexPath.row == 3) {
+        id<DMRModuleAItemProtocol> item = [[DMRBusMediator serviceForProtocol:@protocol(DMRModuleAServiceProtocol)] moduleAGetItemWithName:@"Get Item" tag:10];
+        [[DMRBusMediator  serviceForProtocol:@protocol(DMRModuleAServiceProtocol)] moduleADeliveAProtocolModel:item];
+        return;
+    }
+    
+    if (indexPath.row == 4) {
+        DMRModuleAItem *itme = [DMRModuleAItem new];
+        itme.name = @"name";
+        itme.tag = 100;
+        [[DMRBusMediator serviceForProtocol:@protocol(DMRModuleAServiceProtocol)] moduleADeliveAProtocolModel:itme];
+        return;
+    }
 }
 
 - (UITableView *)tableView {
@@ -92,7 +115,10 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
 //                        @"route url not found"];
         
         _dataSource = @[@"push detail view controller",
-                        @"push detail view 2"
+                        @"push detail with none Connector",
+                        @"alert message",
+                        @"get service item",
+                        @"set service item",
                         ];
     }
     return _dataSource;

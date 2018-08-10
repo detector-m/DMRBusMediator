@@ -8,9 +8,16 @@
 
 #import "DMRModuleAConnector.h"
 #import "DMRBusMediator.h"
+#import "DMRModuleAServiceProtocol.h"
+#import "DMRModuleAItem.h"
+
 #import "DMRModuleADemoViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@interface DMRModuleAConnector () <DMRModuleAServiceProtocol>
+
+@end
 
 @implementation DMRModuleAConnector
 
@@ -88,11 +95,51 @@ NS_ASSUME_NONNULL_BEGIN
  *  (3)如果不能处理，返回一个nil；
  */
 - (nullable id)connectToHandleProtocol:(Protocol *)serviceProtocol {
-//    if (serviceProtocol == @protocol(xxx)) {
-//        return xxx;
-//    }
+    if (serviceProtocol == @protocol(DMRModuleAServiceProtocol)) {
+        return [[self class] sharedConnector];
+    }
     
     return nil;
+}
+
+#pragma mark - ModuleAServiceProtocol
+/**
+ * 下面三个接口都是组件A向外提供服务的协议实现，当前的服务接口都是同步的，如果是异步回调要注意在服务显示中对多线程进行兼容处理（主要是Block的对应）；
+ */
+- (void)moduleAShowAlertWithMessage:(NSString *)message cancelAction:(void (^ _Nullable)(NSDictionary * _Nullable))cancelAction confirmAction:(void (^ _Nullable)(NSDictionary * _Nullable))confirmAction {
+    UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        if (cancelAction) {
+            cancelAction(@{@"alertAction":action});
+        }
+    }];
+    
+    UIAlertAction *confirmAlertAction = [UIAlertAction actionWithTitle:@"confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (confirmAction) {
+            confirmAction(@{@"alertAction":action});
+        }
+    }];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"alert from Module A" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:cancelAlertAction];
+    [alertController addAction:confirmAlertAction];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+}
+
+- (nonnull id<DMRModuleAItemProtocol>)moduleAGetItemWithName:(nonnull NSString *)name tag:(NSInteger)tag {
+    DMRModuleAItem *item = [[DMRModuleAItem alloc] initWithName:name];
+    item.tag = tag;
+    return item;
+}
+
+- (void)moduleADeliveAProtocolModel:(nonnull id<DMRModuleAItemProtocol>)item {
+    NSString *showText =[item description];
+    UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *confirmAlertAction = [UIAlertAction actionWithTitle:@"confirm" style:UIAlertActionStyleDefault handler:nil];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Module A展示外部传入" message:showText preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:cancelAlertAction];
+    [alertController addAction:confirmAlertAction];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

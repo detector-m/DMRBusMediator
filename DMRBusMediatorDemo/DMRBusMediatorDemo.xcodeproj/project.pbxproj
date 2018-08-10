@@ -20,6 +20,7 @@
 		04AB8180211C36C300C5A65E /* DMRBusMediatorTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB817F211C36C300C5A65E /* DMRBusMediatorTipViewController.m */; };
 		04AB8183211C396D00C5A65E /* UIViewController+NavigationTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB8182211C396D00C5A65E /* UIViewController+NavigationTip.m */; };
 		04AB8186211C40B700C5A65E /* DMRModuleADemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB8185211C40B700C5A65E /* DMRModuleADemoViewController.m */; };
+		04AB818B211D292D00C5A65E /* DMRModuleAItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB818A211D292D00C5A65E /* DMRModuleAItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,10 @@
 		04AB8182211C396D00C5A65E /* UIViewController+NavigationTip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationTip.m"; sourceTree = "<group>"; };
 		04AB8184211C40B700C5A65E /* DMRModuleADemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRModuleADemoViewController.h; sourceTree = "<group>"; };
 		04AB8185211C40B700C5A65E /* DMRModuleADemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMRModuleADemoViewController.m; sourceTree = "<group>"; };
+		04AB8187211D28F000C5A65E /* DMRModuleAServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRModuleAServiceProtocol.h; sourceTree = "<group>"; };
+		04AB8188211D290000C5A65E /* DMRModuleAItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRModuleAItemProtocol.h; sourceTree = "<group>"; };
+		04AB8189211D292D00C5A65E /* DMRModuleAItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRModuleAItem.h; sourceTree = "<group>"; };
+		04AB818A211D292D00C5A65E /* DMRModuleAItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMRModuleAItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +182,8 @@
 		04AB8179211C28E400C5A65E /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				04AB8187211D28F000C5A65E /* DMRModuleAServiceProtocol.h */,
+				04AB8188211D290000C5A65E /* DMRModuleAItemProtocol.h */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -186,6 +193,8 @@
 			children = (
 				04AB817B211C2A2200C5A65E /* DMRModuleAConnector.h */,
 				04AB817C211C2A2200C5A65E /* DMRModuleAConnector.m */,
+				04AB8189211D292D00C5A65E /* DMRModuleAItem.h */,
+				04AB818A211D292D00C5A65E /* DMRModuleAItem.m */,
 				04AB8184211C40B700C5A65E /* DMRModuleADemoViewController.h */,
 				04AB8185211C40B700C5A65E /* DMRModuleADemoViewController.m */,
 			);
@@ -324,6 +333,7 @@
 			files = (
 				04AB8146211C1F8200C5A65E /* ViewController.m in Sources */,
 				04AB817D211C2A2200C5A65E /* DMRModuleAConnector.m in Sources */,
+				04AB818B211D292D00C5A65E /* DMRModuleAItem.m in Sources */,
 				04AB8177211C206200C5A65E /* DMRBusMediator.m in Sources */,
 				04AB8151211C1F8400C5A65E /* main.m in Sources */,
 				04AB8180211C36C300C5A65E /* DMRBusMediatorTipViewController.m in Sources */,
