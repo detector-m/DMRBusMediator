@@ -115,6 +115,24 @@ static NSMutableDictionary<NSString *, id<DMRBusMediatorProtocol>> * _Nullable _
 }
 
 #pragma mark - 服务调用接口
+// 根据protocol获取服务实例
++ (nullable id)serviceForProtocol:(nonnull Protocol *)protocol {
+    if (_gConnectorMap.count == 0) {
+        return nil;
+    }
+    
+    __block id returnService = nil;
+    [_gConnectorMap enumerateKeysAndObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString * _Nonnull key, id<DMRBusMediatorProtocol>  _Nonnull connector, BOOL * _Nonnull stop) {
+        if ([connector respondsToSelector:@selector(connectToHandleProtocol:)]) {
+            returnService = [connector connectToHandleProtocol:protocol];
+            if (returnService) {
+                *stop = YES;
+            }
+        }
+    }];
+    
+    return returnService;
+}
 
 #pragma mark - Private
 // 从url获取query参数放入到参数列表中

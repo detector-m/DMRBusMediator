@@ -36,7 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable UIViewController *)viewControllerForURL:(NSURL *)url parameters:(nullable NSDictionary<NSString *, id> *)parameters;
 
 #pragma mark - 服务调用接口
-
+// 根据protocol获取服务实例
++ (nullable id)serviceForProtocol:(nonnull Protocol *)protocol;
 @end
 
 NS_ASSUME_NONNULL_END

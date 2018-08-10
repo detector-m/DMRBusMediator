@@ -56,6 +56,15 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
         
         return;
     }
+    
+    if (indexPath.row == 1) {
+        UIViewController *controller = [DMRBusMediator viewControllerForURL:[NSURL URLWithString:@"productScheme://ADetail"] parameters:@{@"123": @"", @"abc": @"Test ADetailxx"}];
+        if (controller) {
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        
+        return;
+    }
 }
 
 - (UITableView *)tableView {
@@ -83,6 +92,7 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
 //                        @"route url not found"];
         
         _dataSource = @[@"push detail view controller",
+                        @"push detail view 2"
                         ];
     }
     return _dataSource;
