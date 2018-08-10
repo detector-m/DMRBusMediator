@@ -21,6 +21,7 @@
 		04AB8183211C396D00C5A65E /* UIViewController+NavigationTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB8182211C396D00C5A65E /* UIViewController+NavigationTip.m */; };
 		04AB8186211C40B700C5A65E /* DMRModuleADemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB8185211C40B700C5A65E /* DMRModuleADemoViewController.m */; };
 		04AB818B211D292D00C5A65E /* DMRModuleAItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB818A211D292D00C5A65E /* DMRModuleAItem.m */; };
+		04AB818E211D43A200C5A65E /* DMRBusMediatorNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB818D211D43A200C5A65E /* DMRBusMediatorNavigator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		04AB8188211D290000C5A65E /* DMRModuleAItemProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRModuleAItemProtocol.h; sourceTree = "<group>"; };
 		04AB8189211D292D00C5A65E /* DMRModuleAItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRModuleAItem.h; sourceTree = "<group>"; };
 		04AB818A211D292D00C5A65E /* DMRModuleAItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMRModuleAItem.m; sourceTree = "<group>"; };
+		04AB818C211D43A200C5A65E /* DMRBusMediatorNavigator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMRBusMediatorNavigator.h; sourceTree = "<group>"; };
+		04AB818D211D43A200C5A65E /* DMRBusMediatorNavigator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMRBusMediatorNavigator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				04AB8174211C1FEA00C5A65E /* DMRBusMediatorProtocol.h */,
 				04AB8175211C206200C5A65E /* DMRBusMediator.h */,
 				04AB8176211C206200C5A65E /* DMRBusMediator.m */,
+				04AB818C211D43A200C5A65E /* DMRBusMediatorNavigator.h */,
+				04AB818D211D43A200C5A65E /* DMRBusMediatorNavigator.m */,
 				04AB817E211C36C300C5A65E /* DMRBusMediatorTipViewController.h */,
 				04AB817F211C36C300C5A65E /* DMRBusMediatorTipViewController.m */,
 				04AB8181211C396D00C5A65E /* UIViewController+NavigationTip.h */,
@@ -336,6 +341,7 @@
 				04AB818B211D292D00C5A65E /* DMRModuleAItem.m in Sources */,
 				04AB8177211C206200C5A65E /* DMRBusMediator.m in Sources */,
 				04AB8151211C1F8400C5A65E /* main.m in Sources */,
+				04AB818E211D43A200C5A65E /* DMRBusMediatorNavigator.m in Sources */,
 				04AB8180211C36C300C5A65E /* DMRBusMediatorTipViewController.m in Sources */,
 				04AB8183211C396D00C5A65E /* UIViewController+NavigationTip.m in Sources */,
 				04AB8143211C1F8200C5A65E /* AppDelegate.m in Sources */,
