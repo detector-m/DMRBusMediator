@@ -10,7 +10,21 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+NavigationTip.h"
 
+#import "DMRBusMediatorNavigator.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+// DMRBusMediatorNavigator
+/**
+ * 中间件向调用者提供:
+ *  (1)baseViewController的传递key: kDMRBusMediatorRouteViewControllerKey
+ *  (2)newController导航方式的传递key: kDMRBusMediatorRouteModeKey
+ *  (3)DMRBusMediatorNavigator.h定义了目前支持的导航方式有三种；
+ */
+FOUNDATION_EXTERN NSString * __nonnull const kDMRBusMediatorRouteViewControllerKey;
+FOUNDATION_EXTERN NSString * __nonnull const kDMRBusMediatorRouteModeKey;
+
+
 
 @protocol DMRBusMediatorProtocol;
 
@@ -28,8 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)canRouteURL:(NSURL * _Nonnull)url;
 
 // 通过URL直接完成页面跳转
-//+ (BOOL)routeURL:(nonnull NSURL *)url;
-//+ (BOOL)routeURL:(nonnull NSURL *)url parameters:(nonnull NSDictionary<NSString *, id> *)parameters;
++ (BOOL)routeURL:(nonnull NSURL *)url;
++ (BOOL)routeURL:(nonnull NSURL *)url parameters:(nullable NSDictionary<NSString *, id> *)parameters;
 
 // 通过URL获取viewController实例
 + (nullable UIViewController *)viewControllerForURL:(nonnull NSURL *)url;

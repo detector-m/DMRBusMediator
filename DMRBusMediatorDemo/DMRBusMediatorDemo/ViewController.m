@@ -88,6 +88,42 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
         [[DMRBusMediator serviceForProtocol:@protocol(DMRModuleAServiceProtocol)] moduleADeliveAProtocolModel:itme];
         return;
     }
+    
+    if (indexPath.row == 5) {
+        [DMRBusMediator routeURL:[NSURL URLWithString:@"productScheme://ADetail"] parameters:@{kDMRBusMediatorRouteModeKey: @(kNavigationModePresent)}];
+        return;
+    }
+    
+    if (indexPath.row == 6) {
+        [[DMRBusMediatorNavigator navigator] setHookRouteBlock:nil];
+        NSURL *url = [NSURL URLWithString:@"productScheme://ADetail"];
+        if ([DMRBusMediator canRouteURL:url]) {
+            [DMRBusMediator routeURL:url];
+        }
+        return;
+    }
+    
+    if (indexPath.row == 7) {
+        [DMRBusMediator routeURL:[NSURL URLWithString:@"productScheme://ADetail"] parameters:@{@"key":@"test ------ abc"}];
+
+        return;
+    }
+    
+    if (indexPath.row == 8) {
+        __weak typeof(self)weakSelf = self;
+        
+        [[DMRBusMediatorNavigator navigator] setHookRouteBlock:^BOOL(UIViewController * _Nonnull viewController, UIViewController * _Nullable baseViewController, NavigationMode routeMode) {
+            UIViewController *controller = [DMRBusMediator viewControllerForURL:[NSURL URLWithString:@"productScheme://ADetail"] parameters:@{@"123": @"", @"abc": @"Test ADetailxx", @"key": @"----------"}];
+            if (controller) {
+                [weakSelf.navigationController pushViewController:controller animated:YES];
+                return YES;
+            }
+            return NO;
+        }];
+        NSURL *url = [NSURL URLWithString:@"productScheme://ADetail"];
+        [DMRBusMediator routeURL:url];
+        return;
+    }
 }
 
 - (UITableView *)tableView {
@@ -119,7 +155,10 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
                         @"alert message",
                         @"get service item",
                         @"set service item",
-                        ];
+                        @"route url with present",
+                        @"route url with hook nil",
+                        @"route url with parameters",
+                        @"route url with hook"];
     }
     return _dataSource;
 }

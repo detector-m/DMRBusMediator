@@ -13,6 +13,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NSString * const kDMRBusMediatorRouteViewControllerKey = @"DMRBusMediatorRouteViewController";
+NSString * const kDMRBusMediatorRouteModeKey = @"DMRBusMediatorRouteMode";
+
+
+
 // 保存各个模块的connector实例
 static NSMutableDictionary<NSString *, id<DMRBusMediatorProtocol>> * _Nullable _gConnectorMap = nil;
 
@@ -63,6 +68,59 @@ static NSMutableDictionary<NSString *, id<DMRBusMediatorProtocol>> * _Nullable _
         
         return success;
     }
+}
+
++ (BOOL)routeURL:(nonnull NSURL *)url {
+    return [self routeURL:url parameters:nil];
+}
++ (BOOL)routeURL:(nonnull NSURL *)url parameters:(nullable NSDictionary<NSString *, id> *)parameters {
+    if (_gConnectorMap.count == 0) return NO;
+    if (!url) return NO;
+    
+    __block BOOL success = NO;
+    __block NSInteger queryCount = 0;
+    
+    NSDictionary<NSString *, id> *userParameters = [self userParametersWithURL:url parameters:parameters];
+    [_gConnectorMap enumerateKeysAndObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString * _Nonnull key, id<DMRBusMediatorProtocol>  _Nonnull connector, BOOL * _Nonnull stop) {
+        queryCount += 1;
+        if ([connector respondsToSelector:@selector(connectToOpenURL:parameters:)]) {
+            id returnObj = [connector connectToOpenURL:url parameters:userParameters];
+            if ([returnObj isKindOfClass:[UIViewController class]]) {
+                if ([returnObj isKindOfClass:[DMRBusMediatorTipViewController class]]) {
+                    DMRBusMediatorTipViewController *tipController = (DMRBusMediatorTipViewController *)returnObj;
+                    if (tipController.isNotURLSupport) {
+                        success = YES;
+                    }
+                    else {
+                        success = NO;
+#if DEBUG
+                        [tipController showDebugTipController:url withParameters:userParameters];
+                        success = YES;
+#endif
+                    }
+                }
+                else if ([returnObj class] == [UIViewController class]) {
+                    success = YES;
+                }
+                else {
+                    [[DMRBusMediatorNavigator navigator] hookShowURLController:returnObj baseViewController:userParameters[kDMRBusMediatorRouteViewControllerKey] routeMode:userParameters[kDMRBusMediatorRouteModeKey] ? [userParameters[kDMRBusMediatorRouteModeKey] intValue] : kNavigationModePush];
+                    success = YES;
+                }
+                
+                *stop = YES;
+            }
+        }
+    }];
+    
+#if DEBUG
+    if (!success &&
+        queryCount == _gConnectorMap.count) {
+        [(DMRBusMediatorTipViewController *)[UIViewController notFound] showDebugTipController:url withParameters:userParameters];
+        return NO;
+    }
+#endif
+    
+    return success;
 }
 
 
